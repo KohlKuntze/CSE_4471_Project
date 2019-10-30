@@ -12,7 +12,7 @@ public class Driver {
 
     private static ProjectController getController() {
         ProjectModel model = new ProjectModel("Name");
-        ProjectView view = new ProjectView("Project");
+        ProjectView view = new ProjectView();
         ProjectController controller = new ProjectController(model, view);
 
         return controller;
