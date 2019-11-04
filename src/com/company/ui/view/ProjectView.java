@@ -1,44 +1,39 @@
 package com.company.ui.view;
 
+import com.company.ui.controller.ProjectActionListeners;
+
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectView extends JFrame{
+public class ProjectView extends JFrame {
 
     private static final Integer OVERALL_WIDTH = 1500;
     private static final Integer OVERALL_HEIGHT = 750;
 
-    private static final Integer LIST_WIDTH = 1400;
+    private static final Integer LIST_WIDTH = 14000;
     private static final Integer LIST_HEIGHT = 325;
 
-    private final JLabel unknownIpAddressesLabel;
-    private final JScrollPane unknownIpAddressScrollPane;
+    private final ProjectScrollPanel unknownIpAddressesPanel;
+    private final ProjectScrollPanel knownIpAddressesPanel;
+    //private final JScrollPane unknownIpAddressScrollPane;
 
     public ProjectView() {
+        super("Network Monitor");
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(OVERALL_WIDTH, OVERALL_HEIGHT);
-        this.setLayout(new FlowLayout());
+        this.setLayout(new GridLayout(1, 2));
 
-        unknownIpAddressesLabel = new JLabel("Unknown IP Addresses:");
-        this.add(unknownIpAddressesLabel);
+        unknownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getDenyPermissionActionListener());
+        this.add(unknownIpAddressesPanel);
 
-        unknownIpAddressScrollPane = createUnknownIpAddressScrollPanePanel();
-        this.add(unknownIpAddressScrollPane);
+        knownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getDenyPermissionActionListener());
+        this.add(knownIpAddressesPanel);
 
         this.setVisible(true);
-    }
-
-    private static JScrollPane createUnknownIpAddressScrollPanePanel() {
-        JScrollPane unknownIpAddressScrollPane = new JScrollPane();
-        Dimension scrollDimension = new Dimension(95, 375);
-        unknownIpAddressScrollPane.setSize(scrollDimension);
-        unknownIpAddressScrollPane.createVerticalScrollBar();
-        unknownIpAddressScrollPane.setWheelScrollingEnabled(true);
-
-        return unknownIpAddressScrollPane;
     }
 
 
