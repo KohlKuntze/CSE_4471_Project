@@ -19,10 +19,10 @@ public class ProjectScrollPanel extends JPanel {
     JScrollPane scrollPane;
     SelectedItemListener selectedItemListener;
 
-    public ProjectScrollPanel(PermissionActionListener actionListener) {
+    public ProjectScrollPanel(PermissionActionListener actionListener, String label) {
         setLayout(new BorderLayout());
 
-        actionButton = getActionButton("Remove", actionListener);
+        actionButton = getActionButton(label, actionListener);
         add(actionButton, BorderLayout.NORTH);
 
         model = createMacAddressListModel(new ArrayList<>());
