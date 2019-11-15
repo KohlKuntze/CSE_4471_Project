@@ -1,1 +1,4 @@
-workspace.xml
+# ignore all meta files
+out/
+
+.idea/
