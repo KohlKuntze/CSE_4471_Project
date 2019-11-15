@@ -13,11 +13,15 @@ public class Main {
     }
 
     public static void windows() throws IOException{
-        List<String> ipAndMac = Network.getIPAndMac();
+        List<NetworkDevice> devices = Network.getDevices();
 
         System.out.println("***** ALL DEVICES ON THE NETWORK *****");
-        for(String address : ipAndMac){
-            System.out.println(address);
+        if(devices.isEmpty()){
+            System.out.println("No devices connected");
+        }else{
+            for (NetworkDevice device : devices){
+                System.out.println("IP: " + device.getIP() + "\tMAC: " + device.getMAC());
+            }
         }
     }
 
@@ -26,5 +30,7 @@ public class Main {
 
         System.out.println("To be implemented");
     }
+
+
 
 }

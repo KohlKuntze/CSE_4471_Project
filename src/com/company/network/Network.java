@@ -15,12 +15,13 @@ public class Network {
         return s.hasNext() ? s.next() : "";
     }
 
-    public static List<String> getIPAndMac() throws IOException {
+    public static List<NetworkDevice> getDevices() throws IOException {
         String table = getARPTable(ARP_GET_IP_HW );
         String[] arr = table.split(" ");
         List<String> list = Arrays.asList(arr);
         List<String> nums = new ArrayList<>();
-        List<String> ipAndMac = new ArrayList<>();
+        List<NetworkDevice> devices = new ArrayList<>();
+
         int c = 0;
         while(c < list.size()){
             if(list.get(c).matches(".*\\d.*") || list.get(c).matches("ff-ff-ff-ff-ff-ff")){
@@ -32,12 +33,11 @@ public class Network {
         for(int i = 0; i<nums.size(); i++){
             if(nums.get(i).contains("192.168")){
                 if(nums.get(i+1).contains("-")){
-                    ipAndMac.add("IP: " + nums.get(i) + "  MAC: " + nums.get(i+1));
+                    NetworkDevice cpu = new NetworkDevice(nums.get(i), nums.get((i+1)));
+                    devices.add(cpu);
                 }
             }
         }
-        if(ipAndMac.isEmpty()) ipAndMac.add("No devices connected");
-
-        return ipAndMac;
+        return devices;
     }
 }
