@@ -14,7 +14,7 @@ public class ButtonViewer
 
     public static void getComputer()
     {
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Select your CPU type");
         JPanel panel = new JPanel();
 
         JButton macButton = new JButton("\tMac/Linux\t");
