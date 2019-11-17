@@ -101,7 +101,7 @@ public class ProjectScrollPanel extends JPanel {
 
         return model;
     }
-
+    
     private class SelectedItemListener implements ListSelectionListener {
 
         Integer selectedItemIndex;
