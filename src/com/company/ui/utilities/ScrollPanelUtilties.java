@@ -37,6 +37,7 @@ public class ScrollPanelUtilties {
     }
 
     public static void updateUnknownDeviceScrollPanel(ProjectScrollPanel scrollPanel) throws IOException {
+        System.out.println("Updating unknown device scroll panel");
         List<NetworkDevice> networkDeviceList = getNetworkDeviceList();
 
         List<String> unknownDeviceList = getUnknownDevices(networkDeviceList).stream()
@@ -47,6 +48,7 @@ public class ScrollPanelUtilties {
     }
 
     public static void updateKnownDeviceScrollPanel(ProjectScrollPanel scrollPanel) throws IOException {
+        System.out.println("Updating known device scroll panel");
         List<NetworkDevice> networkDeviceList = getNetworkDeviceList();
 
         List<String> knownDeviceList = getKnownDevices(networkDeviceList).stream()
@@ -75,7 +77,7 @@ public class ScrollPanelUtilties {
     private static List<NetworkDevice> getKnownDevices(List<NetworkDevice> devices) throws IOException {
         List<NetworkDevice> knownDeviceList = new ArrayList<>();
         Set<String> knownDevices = SQLiteDB.getPermittedDevices();
-        System.out.println("There are " + knownDevices + " with permission to use network");
+        System.out.println("There are " + knownDevices.size() + " devices with permission to use network");
 
         for (int i = 0; i < devices.size(); i++) {
             NetworkDevice currentDevice = devices.get(i);
