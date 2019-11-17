@@ -1,5 +1,7 @@
 package com.company.network;
 
+import com.company.DataBase.SQLiteDB;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +20,7 @@ public class RejectListener implements ActionListener
 
     public void actionPerformed(ActionEvent event)
     {
-        // TODO
+        SQLiteDB.removeDevicePermission(mac);
         jFrame.dispose();
     }
 }

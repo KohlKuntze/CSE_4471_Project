@@ -22,6 +22,8 @@ public class Driver {
         while (true) {
             ScrollPanelUtilties.updateView(controller.getProjectView());
             Thread.sleep(5000);
+            Thread.sleep(10000);
+
         }
     }
 
