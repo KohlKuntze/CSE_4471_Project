@@ -6,9 +6,9 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class ProjectScrollPanel extends JPanel {
@@ -25,7 +25,14 @@ public class ProjectScrollPanel extends JPanel {
         actionButton = getActionButton(label, actionListener);
         add(actionButton, BorderLayout.NORTH);
 
-        model = createMacAddressListModel(new ArrayList<>());
+        List<String> list = new ArrayList<>();
+
+        for (int i = 0; i < 25; i++) {
+            list.add(UUID.randomUUID().toString());
+        }
+
+        model = createMacAddressListModel(list);
+        //model = createMacAddressListModel(new ArrayList<>());
 
         macAddressJList = new JList();
         macAddressJList.setModel(model);
@@ -39,6 +46,26 @@ public class ProjectScrollPanel extends JPanel {
         actionListener.setScrollPanel(this);
 
         setVisible(true);
+    }
+
+    public DefaultListModel getModel() {
+        return model;
+    }
+
+    public JList getMacAddressJList() {
+        return macAddressJList;
+    }
+
+    public List<String> getMacAddressList() {
+        List<String> macAddressList = new ArrayList<>();
+
+        for (int i = 0; i < macAddressJList.getModel().getSize(); i++) {
+
+            macAddressList.add((String) macAddressJList.getModel().getElementAt(i));
+
+        }
+
+        return macAddressList;
     }
 
     public void update(List<String> updatedMacAddresses) {
@@ -97,7 +124,6 @@ public class ProjectScrollPanel extends JPanel {
                         selectedItemIndex = e.getFirstIndex();
                     }
                 }
-                //System.out.println("selectedItemIndex = " + selectedItemIndex);
             }
         }
 

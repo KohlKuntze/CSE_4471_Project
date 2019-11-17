@@ -13,12 +13,8 @@ public class ProjectView extends JFrame {
     private static final Integer OVERALL_WIDTH = 1500;
     private static final Integer OVERALL_HEIGHT = 750;
 
-    private static final Integer LIST_WIDTH = 14000;
-    private static final Integer LIST_HEIGHT = 325;
-
     private final ProjectScrollPanel unknownIpAddressesPanel;
     private final ProjectScrollPanel knownIpAddressesPanel;
-    //private final JScrollPane unknownIpAddressScrollPane;
 
     public ProjectView() {
         super("Network Monitor");

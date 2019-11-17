@@ -4,14 +4,16 @@ import com.company.ui.view.ProjectScrollPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectActionListeners {
 
-    public static PermissionActionListener getDenyPermissionActionListener() {
+    public static DenyPermissionActionListener getDenyPermissionActionListener() {
         return new DenyPermissionActionListener();
     }
 
-    public static PermissionActionListener getPermitPermissionActionListener() {
+    public static PermitPermissionActionListener getPermitPermissionActionListener() {
         return new PermitPermissionActionListener();
     }
 
@@ -31,7 +33,12 @@ public class ProjectActionListeners {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(e.getActionCommand() + " " + scrollPanel.getSelectedItemIndex());
+            System.out.println("Deny " + e.getActionCommand() + " " + scrollPanel.getSelectedItemIndex());
+            getMacAddressFromList(scrollPanel, scrollPanel.getSelectedItemIndex());
+
+            List<String> newMacAddressList = getNewMacAddressList(scrollPanel, scrollPanel.getSelectedItemIndex());
+
+            scrollPanel.update(newMacAddressList);
         }
 
         public void setScrollPanel(ProjectScrollPanel scrollPanel) {
@@ -49,7 +56,8 @@ public class ProjectActionListeners {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(e.getActionCommand() + " " + scrollPanel.getSelectedItemIndex());
+            System.out.println("Permit " + e.getActionCommand() + " " + scrollPanel.getSelectedItemIndex());
+            getMacAddressFromList(scrollPanel, scrollPanel.getSelectedItemIndex());
         }
 
         public void setScrollPanel(ProjectScrollPanel scrollPanel) {
@@ -59,5 +67,25 @@ public class ProjectActionListeners {
         public ProjectScrollPanel getScrollPane() {
             return scrollPanel;
         }
+    }
+
+    private static String getMacAddressFromList(ProjectScrollPanel scrollPanel, int index) {
+        String result = (String) scrollPanel.getMacAddressJList().getModel().getElementAt(index);
+
+        System.out.println(result);
+
+        return result;
+    }
+
+    private static List<String> getNewMacAddressList(ProjectScrollPanel scrollPanel, int index) {
+        List<String> macAddressList = new ArrayList<>();
+
+        for (int i = 0; i < scrollPanel.getMacAddressList().size(); i++) {
+            if (i != index) {
+                macAddressList.add((String) scrollPanel.getMacAddressJList().getModel().getElementAt(i));
+            }
+        }
+
+        return macAddressList;
     }
 }
