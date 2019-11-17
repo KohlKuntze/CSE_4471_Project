@@ -71,7 +71,7 @@ public class SQLiteDB {
         try{
             Connection c = getConnection();
 
-            String sql = "INSERT INTO Known_Devices(Mac_Address) VALUES (" + Mac_Address + ")";
+            String sql = "INSERT INTO Known_Devices(Mac_Address) VALUES ('" + Mac_Address + "')";
             PreparedStatement insert = c.prepareStatement(sql);
             insert.executeUpdate();
 
@@ -97,7 +97,6 @@ public class SQLiteDB {
     }
 
     public static void createTable(){
-        /*
         try{
             Connection c = getConnection();
             Statement stmt = c.createStatement();
@@ -113,6 +112,5 @@ public class SQLiteDB {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        */
     }
 }
