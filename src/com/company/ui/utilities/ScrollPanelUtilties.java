@@ -19,6 +19,7 @@ import static com.company.network.Network.getDevices;
 public class ScrollPanelUtilties {
 
     public static void updateView(ProjectView view) throws IOException {
+        System.out.println("Updating Project View");
         List<NetworkDevice> networkDeviceList = getNetworkDeviceList();
 
         List<String> unknownDeviceList = getUnknownDevices(networkDeviceList).stream()
@@ -67,6 +68,7 @@ public class ScrollPanelUtilties {
             }
         }
 
+        System.out.println("There were " + unknownDeviceList.size() + " unknown devices");
         return unknownDeviceList;
     }
 
@@ -82,6 +84,7 @@ public class ScrollPanelUtilties {
             }
         }
 
+        System.out.println("There were " + knownDeviceList.size() + " known devices");
         return knownDeviceList;
     }
 
