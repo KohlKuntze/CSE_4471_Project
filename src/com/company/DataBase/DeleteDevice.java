@@ -23,7 +23,7 @@ public class DeleteApp {
     }
  
     /**
-     * Delete a warehouse specified by the id
+     * Delete a device specified by the mac_address
      *
      * @param id
      */
