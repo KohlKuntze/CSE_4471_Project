@@ -1,3 +1,4 @@
+package com.company.DataBase;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -20,7 +21,7 @@ public class SQLiteDB {
 
     public Set<String> listKnown(){
         Set<String> permitted = new HashSet<>();
-        
+
         try{
             this.stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("Select * from Known_Devices");
@@ -35,14 +36,15 @@ public class SQLiteDB {
         } catch (Exception e){
             System.out.print(e.getMessage());
         }
+
         return(permitted);
     }
 
     public void insertIntoTable(String Mac_Address){
         try{
             String sql = "INSERT INTO Known_Devices(Mac_Address) VALUES (" + Mac_Address + ")";
-                PreparedStatement insert = c.prepareStatement(sql);
-                insert.executeUpdate();
+            PreparedStatement insert = c.prepareStatement(sql);
+            insert.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -58,10 +60,10 @@ public class SQLiteDB {
                     + "    Device_Name text\n"
                     + ");";
             stmt.execute(sql);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+    }
     public void closeConnection(){
         try {
             c.close();
@@ -70,4 +72,3 @@ public class SQLiteDB {
         }
     }
 }
-
