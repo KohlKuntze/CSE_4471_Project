@@ -38,4 +38,12 @@ public class ProjectView extends JFrame {
         ProjectView newView = new ProjectView();
         return newView;
     }
+
+    public void updateUnknownIpAddressList(List<String> macAddresses) {
+        unknownIpAddressesPanel.update(macAddresses);
+    }
+
+    public void updateknownIpAddressList(List<String> macAddresses) {
+        knownIpAddressesPanel.update(macAddresses);
+    }
 }

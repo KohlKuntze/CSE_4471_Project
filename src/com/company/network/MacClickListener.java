@@ -18,7 +18,7 @@ public class MacClickListener implements ActionListener
     {
 
         try {
-            Main.mac_linux();
+            Main.macLinux();
         } catch (IOException e) {
             e.printStackTrace();
         }

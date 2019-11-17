@@ -21,15 +21,24 @@ public class Main {
                 String mac = device.getMAC();
                 String ip = device.getIP();
                 AcceptRejectButtons.AcceptOrReject(mac, ip);
-                //System.out.println("IP: " + device.getIP() + "\tMAC: " + device.getMAC());
             }
         }
     }
 
-    public static void mac_linux() throws IOException{
-        // TODO
+    public static void macLinux() throws IOException{
+        List<NetworkDevice> devices = Network.getDevices();
 
-        System.out.println("To be implemented");
+        System.out.println("***** ALL DEVICES ON THE NETWORK *****");
+        if(devices.isEmpty()){
+            System.out.println("No devices connected");
+
+        }else{
+            for (NetworkDevice device : devices){
+                String mac = device.getMAC();
+                String ip = device.getIP();
+                AcceptRejectButtons.AcceptOrReject(mac, ip);
+            }
+        }
     }
 
 
