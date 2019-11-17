@@ -15,7 +15,8 @@ public class SqliteDB {
             System.out.println("Error " + e.getMessage());
         }
     }
-    public void listKnown(){
+    public HashSet listKnown(){
+        HashSet permitted = new HashSet();
         try{
             this.stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("Select * from Known_Devices");
@@ -24,11 +25,13 @@ public class SqliteDB {
                 String Mac_address = rs.getString("Mac_Address");
                 String IP_Address = rs.getString("IP_Add");
                 String Dev_Name = rs.getString("Device_Name");
+                permitted.add(Mac_address);
                 System.out.println(Mac_address+ "  "+IP_Address + "  " + Dev_Name );
             }
         } catch (Exception e){
             System.out.print(e.getMessage());
         }
+        return(permitted);
     }
     public void insertIntoTable(String Mac_Address){
         try{
