@@ -61,7 +61,7 @@ public class ProjectScrollPanel extends JPanel {
         return macAddressList;
     }
 
-    public void update(List<String> updatedMacAddresses) {
+    public void updateMacAddresses(List<String> updatedMacAddresses) {
         model = createMacAddressListModel(updatedMacAddresses);
         macAddressJList.setModel(model);
     }
