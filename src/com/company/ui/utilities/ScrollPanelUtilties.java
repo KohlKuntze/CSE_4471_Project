@@ -35,6 +35,26 @@ public class ScrollPanelUtilties {
 
     }
 
+    public static void updateUnknownDeviceScrollPanel(ProjectScrollPanel scrollPanel) throws IOException {
+        List<NetworkDevice> networkDeviceList = getNetworkDeviceList();
+
+        List<String> unknownDeviceList = getUnknownDevices(networkDeviceList).stream()
+                .map(networkDevice -> networkDevice.getMAC())
+                .collect(Collectors.toList());
+
+        scrollPanel.updateMacAddresses(unknownDeviceList);
+    }
+
+    public static void updateKnownDeviceScrollPanel(ProjectScrollPanel scrollPanel) throws IOException {
+        List<NetworkDevice> networkDeviceList = getNetworkDeviceList();
+
+        List<String> knownDeviceList = getKnownDevices(networkDeviceList).stream()
+                .map(networkDevice -> networkDevice.getMAC())
+                .collect(Collectors.toList());
+
+        scrollPanel.updateMacAddresses(knownDeviceList);
+    }
+
     private static List<NetworkDevice> getUnknownDevices(List<NetworkDevice> devices) throws IOException {
         List<NetworkDevice> unknownDeviceList = new ArrayList<>();
         Set<String> knownDevices = SQLiteDB.getPermittedDevices();
