@@ -13,7 +13,7 @@ public class ProjectController {
         this.view = view;
     }
 
-    public ProjectView getView() {
+    public ProjectView getProjectView() {
         return view;
     }
 }

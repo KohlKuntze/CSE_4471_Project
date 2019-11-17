@@ -1,16 +1,9 @@
 package com.company.app;
 
-import com.company.network.NetworkDevice;
 import com.company.ui.controller.ProjectController;
 import com.company.ui.model.ProjectModel;
 import com.company.ui.utilities.ScrollPanelUtilties;
 import com.company.ui.view.ProjectView;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.company.network.Network.getDevices;
 
 public class Driver {
 
@@ -23,7 +16,7 @@ public class Driver {
 
     private static void run(ProjectController controller) {
         while (true) {
-            ScrollPanelUtilties.updateView(controller.getView());
+            ScrollPanelUtilties.updateView(controller.getProjectView());
         }
     }
 

@@ -21,7 +21,7 @@ public class Network {
 
     public static List<NetworkDevice> getDevices() throws IOException {
         String table = getARPTable(ARP_GET_IP_HW );
-        System.out.println(table);
+        //System.out.println(table);
 
         List<NetworkDevice> devices;
 
@@ -85,6 +85,7 @@ public class Network {
             String currentIp = ipAddresses.get(i);
             String currentMac = macAddresses.get(i);
 
+            //System.out.println(currentMac + " " + currentIp);
             NetworkDevice networkDevice = new NetworkDevice(currentIp, currentMac);
 
             devices.add(networkDevice);
