@@ -1,15 +1,12 @@
-package com.company.DataBase;
 
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
 
 
-public class SQLiteDB {
+public class SqliteDB {
     Connection c = null;
     Statement stmt = null;
 
-    SQLiteDB() {
+    SqliteDB() {
         try {
             //Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:NetworkTraffic.sqlite");
@@ -18,10 +15,8 @@ public class SQLiteDB {
             System.out.println("Error " + e.getMessage());
         }
     }
-
-    public Set<String> listKnown(){
-        Set<String> permitted = new HashSet<>();
-
+    public HashSet listKnown(){
+        HashSet permitted = new HashSet();
         try{
             this.stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("Select * from Known_Devices");
@@ -36,10 +31,8 @@ public class SQLiteDB {
         } catch (Exception e){
             System.out.print(e.getMessage());
         }
-
         return(permitted);
     }
-
     public void insertIntoTable(String Mac_Address){
         try{
             String sql = "INSERT INTO Known_Devices(Mac_Address) VALUES (" + Mac_Address + ")";
@@ -49,7 +42,16 @@ public class SQLiteDB {
             System.out.println(e.getMessage());
         }
     }
+    public void deleteDevice(String Mac_Address) {
+            String sql = "DELETE FROM Known_Devices WHERE Mac_Address = " + Mac_Address;
 
+            try {
+                PreparedStatement delete = c.prepareStatement(sql);
+                delete.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     public void createTable(){
 
         try{
