@@ -52,7 +52,7 @@ public class Network {
         }
 
         for(int i = 0; i<nums.size(); i++){
-            if(nums.get(i).contains("192.168")){
+            if(nums.get(i).contains("192.168") || nums.get(i).contains("172.")){
                 if(nums.get(i+1).contains("-")){
                     NetworkDevice cpu = new NetworkDevice(nums.get(i), nums.get((i+1)));
                     devices.add(cpu);

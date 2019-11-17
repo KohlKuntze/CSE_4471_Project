@@ -43,4 +43,12 @@ public class ProjectView extends JFrame {
     public void updateKnownIpAddressList(List<String> macAddresses) {
         knownIpAddressesPanel.updateMacAddresses(macAddresses);
     }
+
+    public ProjectScrollPanel getUnknownIpAddressesPanel() {
+        return unknownIpAddressesPanel;
+    }
+
+    public ProjectScrollPanel getKnownIpAddressesPanel() {
+        return knownIpAddressesPanel;
+    }
 }
