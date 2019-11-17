@@ -19,12 +19,11 @@ public class ProjectActionListeners {
 
     public interface PermissionActionListener extends ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent e);
+        void actionPerformed(ActionEvent e);
 
-        public void setScrollPanel(ProjectScrollPanel scrollPanel);
+        void setScrollPanel(ProjectScrollPanel scrollPanel);
 
-        public ProjectScrollPanel getScrollPane();
+        ProjectScrollPanel getScrollPane();
     }
 
     public static class DenyPermissionActionListener implements PermissionActionListener {

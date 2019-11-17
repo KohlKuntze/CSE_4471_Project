@@ -25,7 +25,7 @@ public class Main {
         }
     }
 
-    public static void mac_linux() throws IOException{
+    public static void macLinux() throws IOException{
         // TODO
 
         System.out.println("To be implemented");
