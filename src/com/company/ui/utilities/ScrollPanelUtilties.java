@@ -75,6 +75,7 @@ public class ScrollPanelUtilties {
     private static List<NetworkDevice> getKnownDevices(List<NetworkDevice> devices) throws IOException {
         List<NetworkDevice> knownDeviceList = new ArrayList<>();
         Set<String> knownDevices = SQLiteDB.getPermittedDevices();
+        System.out.println("There are " + knownDevices + " with permission to use network");
 
         for (int i = 0; i < devices.size(); i++) {
             NetworkDevice currentDevice = devices.get(i);
