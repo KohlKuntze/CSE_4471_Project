@@ -1,24 +1,65 @@
+
 import java.sql.*;
 
-public class SQLiteDB {
 
-    /**
-     * Connect to a database
-     *
-     * @param fileName the database file name
-     */
-    public static void createNewDatabase(String fileName) {
+public class SqliteDB {
+    Connection c = null;
+    Statement stmt = null;
 
-        String url = "jdbc:sqlite:" + fileName;
+    SqliteDB() {
+        try {
+            //Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:NetworkTraffic.sqlite");
+            System.out.println("Conncted");
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
+    }
+    public void listKnown(){
+        try{
+            this.stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("Select * from Known_Devices");
 
-        try (Connection conn = DriverManager.getConnection(url)) {
-            if (conn != null) {
-                DatabaseMetaData meta = conn.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");
+            while(rs.next()){
+                String Mac_address = rs.getString("Mac_Address");
+                String IP_Address = rs.getString("IP_Add");
+                String Dev_Name = rs.getString("Device_Name");
+                System.out.println(Mac_address+ "  "+IP_Address + "  " + Dev_Name );
             }
-
+        } catch (Exception e){
+            System.out.print(e.getMessage());
+        }
+    }
+    public void insertIntoTable(String Mac_Address){
+        try{
+            String sql = "INSERT INTO Known_Devices(Mac_Address) VALUES (" + Mac_Address + ")";
+                PreparedStatement insert = c.prepareStatement(sql);
+                insert.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
+    public void createTable(){
+
+        try{
+            this.stmt = c.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS Known_Devices(\n"
+                    + "    Mac_Address VarChar(20) PRIMARY KEY,\n"
+                    + "    IP_Add text ,\n"
+                    + "    Device_Name text\n"
+                    + ");";
+            stmt.execute(sql);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    public void closeConnection(){
+        try {
+            c.close();
+        }catch(Exception e){
+
+        }
+    }
+}
+
