@@ -6,24 +6,33 @@ import java.util.Set;
 
 
 public class SQLiteDB {
-    Connection c = null;
-    Statement stmt = null;
 
-    SQLiteDB() {
+    private static Connection getConnection() {
+        Connection c = null;
+
         try {
-            //Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:NetworkTraffic.sqlite");
-            System.out.println("Conncted");
         } catch (Exception e) {
-            System.out.println("Error " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return c;
+    }
+
+    private static void closeConnection(Connection c){
+        try {
+            c.close();
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
-    public Set<String> listKnown(){
+    public static Set<String> getPermittedDevices(){
         Set<String> permitted = new HashSet<>();
-
         try{
-            this.stmt = c.createStatement();
+            Connection c = getConnection();
+            Statement stmt = c.createStatement();
+
             ResultSet rs = stmt.executeQuery("Select * from Known_Devices");
 
             while(rs.next()){
@@ -33,42 +42,60 @@ public class SQLiteDB {
                 permitted.add(Mac_address);
                 System.out.println(Mac_address+ "  "+IP_Address + "  " + Dev_Name );
             }
+
+            closeConnection(c);
+
         } catch (Exception e){
             System.out.print(e.getMessage());
         }
-
         return(permitted);
     }
 
-    public void insertIntoTable(String Mac_Address){
+    public void giveDevicePermission(String Mac_Address){
         try{
+            Connection c = getConnection();
+
             String sql = "INSERT INTO Known_Devices(Mac_Address) VALUES (" + Mac_Address + ")";
             PreparedStatement insert = c.prepareStatement(sql);
             insert.executeUpdate();
+
+            closeConnection(c);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void createTable(){
+    public void removeDevicePermission(String Mac_Address) {
+        String sql = "DELETE FROM Known_Devices WHERE Mac_Address = " + Mac_Address;
+
+        try {
+            Connection c = getConnection();
+
+            PreparedStatement delete = c.prepareStatement(sql);
+            delete.executeUpdate();
+
+            closeConnection(c);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void createTable(){
 
         try{
-            this.stmt = c.createStatement();
+            Connection c = getConnection();
+            Statement stmt = c.createStatement();
+
             String sql = "CREATE TABLE IF NOT EXISTS Known_Devices(\n"
                     + "    Mac_Address VarChar(20) PRIMARY KEY,\n"
                     + "    IP_Add text ,\n"
                     + "    Device_Name text\n"
                     + ");";
             stmt.execute(sql);
+
+            closeConnection(c);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
-    }
-    public void closeConnection(){
-        try {
-            c.close();
-        }catch(Exception e){
-
         }
     }
 }
