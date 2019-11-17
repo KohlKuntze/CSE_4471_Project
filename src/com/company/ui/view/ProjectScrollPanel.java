@@ -8,7 +8,6 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 public class ProjectScrollPanel extends JPanel {
@@ -52,10 +51,13 @@ public class ProjectScrollPanel extends JPanel {
     public List<String> getMacAddressList() {
         List<String> macAddressList = new ArrayList<>();
 
-        for (int i = 0; i < macAddressJList.getModel().getSize(); i++) {
+        ListModel listModel = macAddressJList.getModel();
 
-            macAddressList.add((String) macAddressJList.getModel().getElementAt(i));
+        for (int i = 0; i < listModel.getSize(); i++) {
+            Object currentObject = listModel.getElementAt(i);
+            String currentMacAddress = (String) currentObject;
 
+            macAddressList.add(currentMacAddress);
         }
 
         return macAddressList;
@@ -92,7 +94,9 @@ public class ProjectScrollPanel extends JPanel {
         DefaultListModel model = new DefaultListModel();
 
         for (int i = 0; i < macAddresses.size(); i++) {
-            model.addElement(macAddresses.get(i));
+            String currentMacAddress = macAddresses.get(i);
+
+            model.addElement(currentMacAddress);
         }
 
         return model;
