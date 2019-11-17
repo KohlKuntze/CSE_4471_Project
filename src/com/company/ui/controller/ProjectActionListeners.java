@@ -37,7 +37,7 @@ public class ProjectActionListeners {
 
             List<String> newMacAddressList = getNewMacAddressList(scrollPanel, scrollPanel.getSelectedItemIndex());
 
-            scrollPanel.update(newMacAddressList);
+            scrollPanel.updateMacAddresses(newMacAddressList);
         }
 
         public void setScrollPanel(ProjectScrollPanel scrollPanel) {
