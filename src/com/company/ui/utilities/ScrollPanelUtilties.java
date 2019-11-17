@@ -19,6 +19,7 @@ import static com.company.network.Network.getDevices;
 public class ScrollPanelUtilties {
 
     public static void updateView(ProjectView view) throws IOException {
+        System.out.println("Updating Project View");
         List<NetworkDevice> networkDeviceList = getNetworkDeviceList();
 
         List<String> unknownDeviceList = getUnknownDevices(networkDeviceList).stream()
@@ -67,12 +68,14 @@ public class ScrollPanelUtilties {
             }
         }
 
+        System.out.println("There were " + unknownDeviceList.size() + " unknown devices");
         return unknownDeviceList;
     }
 
     private static List<NetworkDevice> getKnownDevices(List<NetworkDevice> devices) throws IOException {
         List<NetworkDevice> knownDeviceList = new ArrayList<>();
         Set<String> knownDevices = SQLiteDB.getPermittedDevices();
+        System.out.println("There are " + knownDevices + " with permission to use network");
 
         for (int i = 0; i < devices.size(); i++) {
             NetworkDevice currentDevice = devices.get(i);
@@ -82,6 +85,7 @@ public class ScrollPanelUtilties {
             }
         }
 
+        System.out.println("There were " + knownDeviceList.size() + " known devices");
         return knownDeviceList;
     }
 
