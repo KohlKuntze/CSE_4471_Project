@@ -51,21 +51,22 @@ public class ScrollPanelUtilties {
     }
 
     private static List<NetworkDevice> getKnownDevices(List<NetworkDevice> devices) throws IOException {
-        List<NetworkDevice> unknownDeviceList = new ArrayList<>();
+        List<NetworkDevice> knownDeviceList = new ArrayList<>();
         Set<String> knownDevices = SQLiteDB.getPermittedDevices();
 
         for (int i = 0; i < devices.size(); i++) {
             NetworkDevice currentDevice = devices.get(i);
 
             if (knownDevices.contains(currentDevice)) {
-                unknownDeviceList.add(currentDevice);
+                knownDeviceList.add(currentDevice);
             }
         }
 
-        return unknownDeviceList;
+        return knownDeviceList;
     }
 
     private static List<NetworkDevice> getNetworkDeviceList() {
+        System.out.println("Getting network devices");
         List<NetworkDevice> networkDeviceList = new ArrayList<>();
 
         try {

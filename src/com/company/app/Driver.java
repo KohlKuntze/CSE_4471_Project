@@ -12,7 +12,7 @@ public class Driver {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         SQLiteDB.createTable();
-        
+
         ProjectController controller = getController();
         run(controller);
 
@@ -22,7 +22,6 @@ public class Driver {
         while (true) {
             ScrollPanelUtilties.updateView(controller.getProjectView());
             Thread.sleep(5000);
-
         }
     }
 
