@@ -1,3 +1,4 @@
+package com.company.DataBase;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -20,7 +21,7 @@ public class SQLiteDB {
 
     public Set<String> listKnown(){
         Set<String> permitted = new HashSet<>();
-        
+
         try{
             this.stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("Select * from Known_Devices");
@@ -35,6 +36,7 @@ public class SQLiteDB {
         } catch (Exception e){
             System.out.print(e.getMessage());
         }
+
         return(permitted);
     }
 
