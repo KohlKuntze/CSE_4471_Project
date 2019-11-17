@@ -1,6 +1,7 @@
 package com.company.network;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +12,10 @@ public class Network {
     private static final String ARP_GET_IP_HW = "arp -a";
 
     public static String getARPTable(String cmd) throws IOException {
-        Scanner s = new Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A");
+        Runtime runtime = Runtime.getRuntime();
+        Process commandLineOutput = runtime.exec(cmd);
+        InputStream inputStream = commandLineOutput.getInputStream();
+        Scanner s = new Scanner(inputStream).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
     }
 
@@ -24,10 +28,8 @@ public class Network {
         String operatingSystemName = System.getProperty("os.name");
 
         if (operatingSystemName.equals("Mac OS X")) {
-            System.out.println("You have a Mac");
             devices = getNetworkDevicesMac(table);
         } else {
-            System.out.println("You have a Windows");
             devices = getNetworkDevicesWindows(table);
         }
 
@@ -42,7 +44,7 @@ public class Network {
 
         int c = 0;
         while(c < list.size()){
-            if(list.get(c).matches(".*\\d.*") || list.get(c).matches("ff-ff-ff-ff-ff-ff")){
+            if(list.get(c).matches(".*\\d.*")){
                 nums.add(list.get(c));
             }
             c++;
@@ -74,8 +76,7 @@ public class Network {
                 ipAddresses.add(ipAddress);
             }
 
-            if (isMacMacAddress(str)) {
-                System.out.println(str);
+            if (isMacMacAddress(str) || str.equals("(incomplete)")) {
                 macAddresses.add(str);
             }
         }
@@ -106,5 +107,17 @@ public class Network {
         }
 
         return false;
+    }
+
+    public static String getNameCommand(String cmd) throws IOException {
+        Scanner s = new Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
+    public static String getName(String ip) throws IOException {
+        String table = getNameCommand("ping -a "+ip);
+        String[] arr = table.split(" ");
+        return arr[1];
+
     }
 }
