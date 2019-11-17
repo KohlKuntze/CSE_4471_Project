@@ -82,12 +82,12 @@ public class ProjectActionListeners {
             if (knownDevices.contains(macAddress)) {
                 System.out.println("The Mac Address was present");
                 SQLiteDB.removeDevicePermission(macAddress);
-                
-                try {
-                    ScrollPanelUtilties.updateKnownDeviceScrollPanel(scrollPanel);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+            }
+
+            try {
+                ScrollPanelUtilties.updateKnownDeviceScrollPanel(scrollPanel);
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
 
 
