@@ -33,6 +33,7 @@ public class Network {
             devices = getNetworkDevicesWindows(table);
         }
 
+        System.out.println("Found " + devices.size() + " devices on network");
         return devices;
     }
 
@@ -71,13 +72,14 @@ public class Network {
 
         for (String str : list) {
 
-            if (isMacIpAddress(str)) {
+            if (str.length() >= 9 && str.contains(".") && str.contains("(")) {
                 String ipAddress = str.substring(1, str.length() - 1);
                 ipAddresses.add(ipAddress);
             }
 
             if (isMacMacAddress(str) || str.equals("(incomplete)")) {
                 macAddresses.add(str);
+
             }
         }
 
@@ -85,7 +87,6 @@ public class Network {
             String currentIp = ipAddresses.get(i);
             String currentMac = macAddresses.get(i);
 
-            //System.out.println(currentMac + " " + currentIp);
             NetworkDevice networkDevice = new NetworkDevice(currentIp, currentMac);
 
             devices.add(networkDevice);
@@ -95,9 +96,7 @@ public class Network {
     }
 
     private static boolean isMacIpAddress(String str) {
-        if (str.indexOf(".") > 0) {
-            return true;
-        }
+        if (str.length() >= 9 && str.contains(".") && str.contains("(")) return true;
 
         return false;
     }

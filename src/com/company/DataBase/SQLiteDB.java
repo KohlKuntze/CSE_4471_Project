@@ -1,3 +1,4 @@
+
 package com.company.DataBase;
 
 import java.sql.*;
@@ -96,7 +97,7 @@ public class SQLiteDB {
     }
 
     public static void createTable(){
-
+        /*
         try{
             Connection c = getConnection();
             Statement stmt = c.createStatement();
@@ -112,5 +113,6 @@ public class SQLiteDB {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        */
     }
 }

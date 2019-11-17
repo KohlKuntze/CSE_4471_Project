@@ -1,10 +1,12 @@
 package com.company.ui.controller;
 
 import com.company.DataBase.SQLiteDB;
+import com.company.ui.utilities.ScrollPanelUtilties;
 import com.company.ui.view.ProjectScrollPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -34,15 +36,22 @@ public class ProjectActionListeners {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(e.getActionCommand() + " " + scrollPanel.getSelectedItemIndex());
             int itemIndex = scrollPanel.getSelectedItemIndex();
 
             String macAddress = getMacAddressFromList(scrollPanel, itemIndex);
+
+            System.out.println("Giving permission to " + macAddress);
 
             Set<String> knownDevices = SQLiteDB.getPermittedDevices();
 
             if (!knownDevices.contains(macAddress)) {
                 SQLiteDB.giveDevicePermission(macAddress);
+            }
+
+            try {
+                ScrollPanelUtilties.updateUnknownDeviceScrollPanel(scrollPanel);
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
 
         }
@@ -62,15 +71,18 @@ public class ProjectActionListeners {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println(e.getActionCommand() + " " + scrollPanel.getSelectedItemIndex());
             int itemIndex = scrollPanel.getSelectedItemIndex();
 
             String macAddress = getMacAddressFromList(scrollPanel, itemIndex);
 
+            System.out.println("Removing permission from " + macAddress);
+
             Set<String> knownDevices = SQLiteDB.getPermittedDevices();
 
-            if (knownDevices.contains(macAddress)) {
-                SQLiteDB.removeDevicePermission(macAddress);
+            try {
+                ScrollPanelUtilties.updateKnownDeviceScrollPanel(scrollPanel);
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
 
         }
