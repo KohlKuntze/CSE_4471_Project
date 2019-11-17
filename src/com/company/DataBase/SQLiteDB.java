@@ -159,7 +159,7 @@ public class SQLiteDB {
             Connection c = getConnection();
             Statement stmt = c.createStatement();
 
-            String sql = "DELETE TABLE IF EXISTS Seen_Devices";
+            String sql = "DROP TABLE Seen_Devices";
             stmt.execute(sql);
             closeStatement(stmt);
             closeConnection(c);
