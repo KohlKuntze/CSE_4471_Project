@@ -26,6 +26,20 @@ public class SQLiteDB {
             e.printStackTrace();
         }
     }
+    private static void closeStatement(Statement s){
+        try {
+            s.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    private static void closeResultSet(ResultSet rs){
+        try {
+            rs.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public static Set<String> getPermittedDevices(){
         Set<String> permitted = new HashSet<>();
@@ -42,7 +56,8 @@ public class SQLiteDB {
                 permitted.add(Mac_address);
                 System.out.println(Mac_address+ "  "+IP_Address + "  " + Dev_Name );
             }
-
+            closeStatement(stmt);
+            closeResultSet(rs);
             closeConnection(c);
 
         } catch (Exception e){
@@ -92,7 +107,7 @@ public class SQLiteDB {
                     + "    Device_Name text\n"
                     + ");";
             stmt.execute(sql);
-
+            closeStatement(stmt);
             closeConnection(c);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
