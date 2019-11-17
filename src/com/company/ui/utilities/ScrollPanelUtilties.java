@@ -25,7 +25,13 @@ public class ScrollPanelUtilties {
                 .map(networkDevice -> networkDevice.getMAC())
                 .collect(Collectors.toList());
 
+        List<String> knownDeviceList = getKnownDevices(networkDeviceList).stream()
+                .map(networkDevice -> networkDevice.getMAC())
+                .collect(Collectors.toList());
+
+
         view.updateUnknownIpAddressList(unknownDeviceList);
+        view.updateKnownIpAddressList(knownDeviceList);
 
     }
 
@@ -37,7 +43,21 @@ public class ScrollPanelUtilties {
             NetworkDevice currentDevice = devices.get(i);
 
             if (!knownDevices.contains(currentDevice)) {
-                //AcceptRejectButtons.AcceptOrReject(currentDevice.getMAC(), currentDevice.getIP());
+                unknownDeviceList.add(currentDevice);
+            }
+        }
+
+        return unknownDeviceList;
+    }
+
+    private static List<NetworkDevice> getKnownDevices(List<NetworkDevice> devices) throws IOException {
+        List<NetworkDevice> unknownDeviceList = new ArrayList<>();
+        Set<String> knownDevices = SQLiteDB.getPermittedDevices();
+
+        for (int i = 0; i < devices.size(); i++) {
+            NetworkDevice currentDevice = devices.get(i);
+
+            if (knownDevices.contains(currentDevice)) {
                 unknownDeviceList.add(currentDevice);
             }
         }

@@ -30,7 +30,6 @@ public class ProjectView extends JFrame {
         this.setVisible(true);
     }
 
-
     public static ProjectView getInstance() {
         JFrame.setDefaultLookAndFeelDecorated(true);
         ProjectView newView = new ProjectView();
@@ -41,7 +40,7 @@ public class ProjectView extends JFrame {
         unknownIpAddressesPanel.updateMacAddresses(macAddresses);
     }
 
-    public void updateknownIpAddressList(List<String> macAddresses) {
+    public void updateKnownIpAddressList(List<String> macAddresses) {
         knownIpAddressesPanel.updateMacAddresses(macAddresses);
     }
 }

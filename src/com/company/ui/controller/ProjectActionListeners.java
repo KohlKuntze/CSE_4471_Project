@@ -1,20 +1,22 @@
 package com.company.ui.controller;
 
+import com.company.DataBase.SQLiteDB;
 import com.company.ui.view.ProjectScrollPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ProjectActionListeners {
 
-    public static DenyPermissionActionListener getDenyPermissionActionListener() {
-        return new DenyPermissionActionListener();
+    public static GivePermissionActionListener getDenyPermissionActionListener() {
+        return new GivePermissionActionListener();
     }
 
-    public static PermitPermissionActionListener getPermitPermissionActionListener() {
-        return new PermitPermissionActionListener();
+    public static RemovePermissionActionListener getPermitPermissionActionListener() {
+        return new RemovePermissionActionListener();
     }
 
     public interface PermissionActionListener extends ActionListener {
@@ -26,18 +28,23 @@ public class ProjectActionListeners {
         ProjectScrollPanel getScrollPane();
     }
 
-    public static class DenyPermissionActionListener implements PermissionActionListener {
+    public static class GivePermissionActionListener implements PermissionActionListener {
 
         ProjectScrollPanel scrollPanel;
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Deny " + e.getActionCommand() + " " + scrollPanel.getSelectedItemIndex());
-            getMacAddressFromList(scrollPanel, scrollPanel.getSelectedItemIndex());
+            System.out.println(e.getActionCommand() + " " + scrollPanel.getSelectedItemIndex());
+            int itemIndex = scrollPanel.getSelectedItemIndex();
 
-            List<String> newMacAddressList = getNewMacAddressList(scrollPanel, scrollPanel.getSelectedItemIndex());
+            String macAddress = getMacAddressFromList(scrollPanel, itemIndex);
 
-            scrollPanel.updateMacAddresses(newMacAddressList);
+            Set<String> knownDevices = SQLiteDB.getPermittedDevices();
+
+            if (!knownDevices.contains(macAddress)) {
+                SQLiteDB.giveDevicePermission(macAddress);
+            }
+
         }
 
         public void setScrollPanel(ProjectScrollPanel scrollPanel) {
@@ -49,14 +56,23 @@ public class ProjectActionListeners {
         }
     }
 
-    public static class PermitPermissionActionListener implements PermissionActionListener {
+    public static class RemovePermissionActionListener implements PermissionActionListener {
 
         ProjectScrollPanel scrollPanel;
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Permit " + e.getActionCommand() + " " + scrollPanel.getSelectedItemIndex());
-            getMacAddressFromList(scrollPanel, scrollPanel.getSelectedItemIndex());
+            System.out.println(e.getActionCommand() + " " + scrollPanel.getSelectedItemIndex());
+            int itemIndex = scrollPanel.getSelectedItemIndex();
+
+            String macAddress = getMacAddressFromList(scrollPanel, itemIndex);
+
+            Set<String> knownDevices = SQLiteDB.getPermittedDevices();
+
+            if (knownDevices.contains(macAddress)) {
+                SQLiteDB.removeDevicePermission(macAddress);
+            }
+
         }
 
         public void setScrollPanel(ProjectScrollPanel scrollPanel) {
@@ -70,8 +86,6 @@ public class ProjectActionListeners {
 
     private static String getMacAddressFromList(ProjectScrollPanel scrollPanel, int index) {
         String result = (String) scrollPanel.getMacAddressJList().getModel().getElementAt(index);
-
-        System.out.println(result);
 
         return result;
     }
