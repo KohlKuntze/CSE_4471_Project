@@ -2,11 +2,11 @@
 import java.sql.*;
 
 
-public class SqliteDB {
+public class SQLiteDB {
     Connection c = null;
     Statement stmt = null;
 
-    SqliteDB() {
+    SQLiteDB() {
         try {
             //Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:NetworkTraffic.sqlite");
@@ -15,6 +15,7 @@ public class SqliteDB {
             System.out.println("Error " + e.getMessage());
         }
     }
+
     public void listKnown(){
         try{
             this.stmt = c.createStatement();
