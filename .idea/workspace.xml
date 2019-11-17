@@ -3,19 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cfb66489-9741-4f6b-8c28-17577dc21b45" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSE_4471_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CSE_4471_Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE_4471_Project/DDosTest$DdosThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE_4471_Project/DDosTest$DdosThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE_4471_Project/DDosTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE_4471_Project/DDosTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/app/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/app/Driver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/controller/ProjectActionListeners$PermissionActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/controller/ProjectActionListeners$PermissionActionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/controller/ProjectActionListeners.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/controller/ProjectActionListeners.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/controller/ProjectController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/controller/ProjectController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/utilities/ScrollPanelSetupUtilties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/view/ProjectScrollPanel$SelectedItemListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/view/ProjectScrollPanel$SelectedItemListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/view/ProjectScrollPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/view/ProjectScrollPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/view/ProjectView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSE_4471_Project/com/company/ui/view/ProjectView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DDosTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DDosTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataBase/SQLiteDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/DataBase/SQLiteDB.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,14 +58,12 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572904597993" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -92,14 +77,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.DDosTest">
-    <configuration name="DDosTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DDosTest" />
-      <module name="CSE_4471_Project" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.Driver">
     <configuration name="Driver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.company.app.Driver" />
       <module name="CSE_4471_Project" />
@@ -126,11 +104,9 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Driver" />
-      <item itemvalue="Application.DDosTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DDosTest" />
         <item itemvalue="Application.Driver" />
         <item itemvalue="Application.Main" />
       </list>
@@ -147,6 +123,14 @@
       <option name="presentableId" value="Default" />
       <updated>1571838303390</updated>
     </task>
+    <task id="LOCAL-00001" summary="uncommented create table">
+      <created>1574025566705</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1574025566705</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,5 +150,82 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
+    <MESSAGE value="uncommented create table" />
+    <option name="LAST_COMMIT_MESSAGE" value="uncommented create table" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>10</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>CSE_4471_Project</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

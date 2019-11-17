@@ -27,6 +27,20 @@ public class SQLiteDB {
             e.printStackTrace();
         }
     }
+    private static void closeStatement(Statement s){
+        try {
+            s.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    private static void closeResultSet(ResultSet rs){
+        try {
+            rs.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public static Set<String> getPermittedDevices(){
         Set<String> permitted = new HashSet<>();
@@ -43,7 +57,8 @@ public class SQLiteDB {
                 permitted.add(Mac_address);
                 System.out.println(Mac_address+ "  "+IP_Address + "  " + Dev_Name );
             }
-
+            closeStatement(stmt);
+            closeResultSet(rs);
             closeConnection(c);
 
         } catch (Exception e){
@@ -56,7 +71,7 @@ public class SQLiteDB {
         try{
             Connection c = getConnection();
 
-            String sql = "INSERT INTO Known_Devices(Mac_Address) VALUES (\"" + Mac_Address + "\")";
+            String sql = "INSERT INTO Known_Devices(Mac_Address) VALUES ('" + Mac_Address + "')";
             PreparedStatement insert = c.prepareStatement(sql);
             insert.executeUpdate();
 
@@ -67,7 +82,7 @@ public class SQLiteDB {
     }
 
     public static void removeDevicePermission(String Mac_Address) {
-        String sql = "DELETE FROM Known_Devices WHERE Mac_Address = \"" + Mac_Address + "\"";
+        String sql = "DELETE FROM Known_Devices WHERE Mac_Address = " + Mac_Address;
 
         try {
             Connection c = getConnection();
@@ -82,7 +97,6 @@ public class SQLiteDB {
     }
 
     public static void createTable(){
-        /*
         try{
             Connection c = getConnection();
             Statement stmt = c.createStatement();
@@ -93,11 +107,10 @@ public class SQLiteDB {
                     + "    Device_Name text\n"
                     + ");";
             stmt.execute(sql);
-
+            closeStatement(stmt);
             closeConnection(c);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        */
     }
 }
