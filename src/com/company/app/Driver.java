@@ -20,6 +20,7 @@ public class Driver {
 
     private static void run(ProjectController controller) throws IOException, InterruptedException {
         while (true) {
+
             ScrollPanelUtilties.updateView(controller.getProjectView());
             Thread.sleep(5000);
             Thread.sleep(10000);
@@ -28,7 +29,8 @@ public class Driver {
     }
 
 
-    private static ProjectController getController() {
+    private static ProjectController getController()
+    {
         ProjectModel model = new ProjectModel("Name");
         ProjectView view = new ProjectView();
         ProjectController controller = new ProjectController(model, view);

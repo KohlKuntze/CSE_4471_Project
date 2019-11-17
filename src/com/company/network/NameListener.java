@@ -21,7 +21,6 @@ public class NameListener implements ActionListener
 
     public void actionPerformed(ActionEvent event)
     {
-        // TODO
         String name = "unable to find name";
         try {
             name = getName();
@@ -32,7 +31,7 @@ public class NameListener implements ActionListener
         jFrame.dispose();
 
         try {
-            AcceptRejectWithName.AcceptOrReject(mac, name);
+            NewDeviceOk.newDeviceFound(mac, name);
         } catch (IOException e) {
             e.printStackTrace();
         }
