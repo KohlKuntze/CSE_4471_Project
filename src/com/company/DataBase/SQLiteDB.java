@@ -56,7 +56,7 @@ public class SQLiteDB {
         try{
             Connection c = getConnection();
 
-            String sql = "INSERT INTO Known_Devices(Mac_Address) VALUES (" + Mac_Address + ")";
+            String sql = "INSERT INTO Known_Devices(Mac_Address) VALUES (\"" + Mac_Address + "\")";
             PreparedStatement insert = c.prepareStatement(sql);
             insert.executeUpdate();
 
@@ -67,7 +67,7 @@ public class SQLiteDB {
     }
 
     public static void removeDevicePermission(String Mac_Address) {
-        String sql = "DELETE FROM Known_Devices WHERE Mac_Address = " + Mac_Address;
+        String sql = "DELETE FROM Known_Devices WHERE Mac_Address = \"" + Mac_Address + "\"";
 
         try {
             Connection c = getConnection();
