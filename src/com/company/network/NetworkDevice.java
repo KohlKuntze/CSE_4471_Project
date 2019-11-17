@@ -26,4 +26,5 @@ public class NetworkDevice {
     public void setMAC(String MAC) {
         this.MAC = MAC;
     }
+
 }

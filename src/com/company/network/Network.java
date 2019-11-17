@@ -24,7 +24,7 @@ public class Network {
 
         int c = 0;
         while(c < list.size()){
-            if(list.get(c).matches(".*\\d.*") || list.get(c).matches("ff-ff-ff-ff-ff-ff")){
+            if(list.get(c).matches(".*\\d.*") /*|| list.get(c).matches("ff-ff-ff-ff-ff-ff")*/){
                 nums.add(list.get(c));
             }
             c++;
@@ -39,5 +39,16 @@ public class Network {
             }
         }
         return devices;
+    }
+
+    public static String getNameCommand(String cmd) throws IOException {
+        Scanner s = new Scanner(Runtime.getRuntime().exec(cmd).getInputStream()).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
+    public static String getName(String ip) throws IOException {
+        String table = getNameCommand("ping -a "+ip);
+        String[] arr = table.split(" ");
+        return arr[1];
     }
 }
