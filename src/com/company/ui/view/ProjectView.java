@@ -3,9 +3,7 @@ package com.company.ui.view;
 import com.company.ui.controller.ProjectActionListeners;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectView extends JFrame {
@@ -23,10 +21,10 @@ public class ProjectView extends JFrame {
         this.setSize(OVERALL_WIDTH, OVERALL_HEIGHT);
         this.setLayout(new GridLayout(1, 2));
 
-        unknownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getDenyPermissionActionListener(), "Remove");
+        unknownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getDenyPermissionActionListener(), "Give Permission");
         this.add(unknownIpAddressesPanel);
 
-        knownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getPermitPermissionActionListener(), "Add");
+        knownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getPermitPermissionActionListener(), "Remove Permission");
         this.add(knownIpAddressesPanel);
 
         this.setVisible(true);
@@ -37,5 +35,13 @@ public class ProjectView extends JFrame {
         JFrame.setDefaultLookAndFeelDecorated(true);
         ProjectView newView = new ProjectView();
         return newView;
+    }
+
+    public void updateUnknownIpAddressList(List<String> macAddresses) {
+        unknownIpAddressesPanel.updateMacAddresses(macAddresses);
+    }
+
+    public void updateknownIpAddressList(List<String> macAddresses) {
+        knownIpAddressesPanel.updateMacAddresses(macAddresses);
     }
 }

@@ -5,24 +5,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class MacClickListener implements ActionListener
+public class AcceptListener implements ActionListener
 {
 
     JFrame jFrame;
+    String mac;
 
-    public MacClickListener(JFrame jFrame){
+    public AcceptListener(JFrame jFrame, String mac){
+        this.mac = mac;
         this.jFrame = jFrame;
     }
 
     public void actionPerformed(ActionEvent event)
     {
-
-        try {
-            Main.macLinux();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        // TODO
         jFrame.dispose();
     }
 }

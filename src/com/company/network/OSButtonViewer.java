@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class ButtonViewer
+public class OSButtonViewer
 {
     private static final int FRAME_WIDTH = 200;
     private static final int FRAME_HEIGHT = 100;

@@ -25,14 +25,7 @@ public class ProjectScrollPanel extends JPanel {
         actionButton = getActionButton(label, actionListener);
         add(actionButton, BorderLayout.NORTH);
 
-        List<String> list = new ArrayList<>();
-
-        for (int i = 0; i < 25; i++) {
-            list.add(UUID.randomUUID().toString());
-        }
-
-        model = createMacAddressListModel(list);
-        //model = createMacAddressListModel(new ArrayList<>());
+        model = createMacAddressListModel(new ArrayList<>());
 
         macAddressJList = new JList();
         macAddressJList.setModel(model);
@@ -68,7 +61,7 @@ public class ProjectScrollPanel extends JPanel {
         return macAddressList;
     }
 
-    public void update(List<String> updatedMacAddresses) {
+    public void updateMacAddresses(List<String> updatedMacAddresses) {
         model = createMacAddressListModel(updatedMacAddresses);
         macAddressJList.setModel(model);
     }
