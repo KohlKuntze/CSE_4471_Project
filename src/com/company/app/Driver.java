@@ -1,5 +1,6 @@
 package com.company.app;
 
+import com.company.DataBase.SQLiteDB;
 import com.company.ui.controller.ProjectController;
 import com.company.ui.model.ProjectModel;
 import com.company.ui.utilities.ScrollPanelUtilties;
@@ -10,7 +11,8 @@ import java.io.IOException;
 public class Driver {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
+        SQLiteDB.createTable();
+        
         ProjectController controller = getController();
         run(controller);
 

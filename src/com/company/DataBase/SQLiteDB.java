@@ -46,12 +46,12 @@ public class SQLiteDB {
             closeConnection(c);
 
         } catch (Exception e){
-            System.out.print(e.getMessage());
+            //System.out.print(e.getMessage());
         }
         return(permitted);
     }
 
-    public void giveDevicePermission(String Mac_Address){
+    public static void giveDevicePermission(String Mac_Address){
         try{
             Connection c = getConnection();
 
@@ -65,7 +65,7 @@ public class SQLiteDB {
         }
     }
 
-    public void removeDevicePermission(String Mac_Address) {
+    public static void removeDevicePermission(String Mac_Address) {
         String sql = "DELETE FROM Known_Devices WHERE Mac_Address = " + Mac_Address;
 
         try {
