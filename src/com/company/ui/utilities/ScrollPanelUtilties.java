@@ -16,6 +16,23 @@ import static com.company.network.Network.getDevices;
 
 public class ScrollPanelUtilties {
 
+    public static void initalStartUp(ProjectView view) throws IOException {
+        System.out.println("Updating Project View");
+        List<NetworkDevice> networkDeviceList = getNetworkDeviceList();
+
+        List<String> unknownDeviceList = getUnknownDevices(networkDeviceList).stream()
+                .map(networkDevice -> networkDevice.getMAC())
+                .collect(Collectors.toList());
+
+        List<String> knownDeviceList = getKnownDevices(networkDeviceList).stream()
+                .map(networkDevice -> networkDevice.getMAC())
+                .collect(Collectors.toList());
+
+
+        view.updateUnknownIpAddressList(unknownDeviceList);
+        view.updateKnownIpAddressList(knownDeviceList);
+
+    }
 
     public static void updateView(ProjectView view) throws IOException {
         System.out.println("Updating Project View");
