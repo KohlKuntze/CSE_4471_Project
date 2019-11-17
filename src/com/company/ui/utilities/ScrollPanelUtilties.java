@@ -65,7 +65,7 @@ public class ScrollPanelUtilties {
         for (int i = 0; i < devices.size(); i++) {
             NetworkDevice currentDevice = devices.get(i);
 
-            if (!knownDevices.contains(currentDevice)) {
+            if (!knownDevices.contains(currentDevice.getMAC())) {
                 unknownDeviceList.add(currentDevice);
             }
         }
@@ -81,8 +81,7 @@ public class ScrollPanelUtilties {
 
         for (int i = 0; i < devices.size(); i++) {
             NetworkDevice currentDevice = devices.get(i);
-
-            if (knownDevices.contains(currentDevice)) {
+            if (knownDevices.contains(currentDevice.getMAC())) {
                 knownDeviceList.add(currentDevice);
             }
         }

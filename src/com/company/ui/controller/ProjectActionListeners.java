@@ -79,11 +79,17 @@ public class ProjectActionListeners {
 
             Set<String> knownDevices = SQLiteDB.getPermittedDevices();
 
-            try {
-                ScrollPanelUtilties.updateKnownDeviceScrollPanel(scrollPanel);
-            } catch (IOException e1) {
-                e1.printStackTrace();
+            if (knownDevices.contains(macAddress)) {
+                System.out.println("The Mac Address was present");
+                SQLiteDB.removeDevicePermission(macAddress);
+                
+                try {
+                    ScrollPanelUtilties.updateKnownDeviceScrollPanel(scrollPanel);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
+
 
         }
 

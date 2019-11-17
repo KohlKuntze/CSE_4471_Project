@@ -57,6 +57,7 @@ public class SQLiteDB {
                 permitted.add(Mac_address);
                 System.out.println(Mac_address+ "  "+IP_Address + "  " + Dev_Name );
             }
+
             closeStatement(stmt);
             closeResultSet(rs);
             closeConnection(c);
@@ -82,7 +83,8 @@ public class SQLiteDB {
     }
 
     public static void removeDevicePermission(String Mac_Address) {
-        String sql = "DELETE FROM Known_Devices WHERE Mac_Address = " + Mac_Address;
+        System.out.println("Removing permission for " + Mac_Address);
+        String sql = "DELETE FROM Known_Devices WHERE Mac_Address = \"" + Mac_Address + "\"";
 
         try {
             Connection c = getConnection();
