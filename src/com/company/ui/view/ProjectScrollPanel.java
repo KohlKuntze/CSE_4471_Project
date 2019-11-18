@@ -8,7 +8,6 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 public class ProjectScrollPanel extends JPanel {
@@ -19,11 +18,16 @@ public class ProjectScrollPanel extends JPanel {
     JScrollPane scrollPane;
     SelectedItemListener selectedItemListener;
 
-    public ProjectScrollPanel(PermissionActionListener actionListener, String label) {
+    public ProjectScrollPanel(PermissionActionListener actionListener, String label, String buttonLabel) {
         setLayout(new BorderLayout());
 
-        actionButton = getActionButton(label, actionListener);
-        add(actionButton, BorderLayout.NORTH);
+        JLabel jLabel = new JLabel(label);
+        jLabel.setSize(new Dimension(750, 50));
+        jLabel.setHorizontalAlignment(JLabel.CENTER);
+        add(jLabel, BorderLayout.NORTH);
+
+        actionButton = getActionButton(buttonLabel, actionListener);
+        add(actionButton, BorderLayout.SOUTH);
 
         model = createMacAddressListModel(new ArrayList<>());
 
@@ -52,10 +56,13 @@ public class ProjectScrollPanel extends JPanel {
     public List<String> getMacAddressList() {
         List<String> macAddressList = new ArrayList<>();
 
-        for (int i = 0; i < macAddressJList.getModel().getSize(); i++) {
+        ListModel listModel = macAddressJList.getModel();
 
-            macAddressList.add((String) macAddressJList.getModel().getElementAt(i));
+        for (int i = 0; i < listModel.getSize(); i++) {
+            Object currentObject = listModel.getElementAt(i);
+            String currentMacAddress = (String) currentObject;
 
+            macAddressList.add(currentMacAddress);
         }
 
         return macAddressList;
@@ -92,12 +99,14 @@ public class ProjectScrollPanel extends JPanel {
         DefaultListModel model = new DefaultListModel();
 
         for (int i = 0; i < macAddresses.size(); i++) {
-            model.addElement(macAddresses.get(i));
+            String currentMacAddress = macAddresses.get(i);
+
+            model.addElement(currentMacAddress);
         }
 
         return model;
     }
-
+    
     private class SelectedItemListener implements ListSelectionListener {
 
         Integer selectedItemIndex;

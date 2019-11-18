@@ -21,10 +21,10 @@ public class ProjectView extends JFrame {
         this.setSize(OVERALL_WIDTH, OVERALL_HEIGHT);
         this.setLayout(new GridLayout(1, 2));
 
-        unknownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getDenyPermissionActionListener(), "Give Permission");
+        unknownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getDenyPermissionActionListener(), "Unknown Devices", "Give Permission");
         this.add(unknownIpAddressesPanel);
 
-        knownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getPermitPermissionActionListener(), "Remove Permission");
+        knownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getPermitPermissionActionListener(), "Known Devices", "Remove Permission");
         this.add(knownIpAddressesPanel);
 
         this.setVisible(true);
@@ -42,5 +42,13 @@ public class ProjectView extends JFrame {
 
     public void updateKnownIpAddressList(List<String> macAddresses) {
         knownIpAddressesPanel.updateMacAddresses(macAddresses);
+    }
+
+    public ProjectScrollPanel getUnknownIpAddressesPanel() {
+        return unknownIpAddressesPanel;
+    }
+
+    public ProjectScrollPanel getKnownIpAddressesPanel() {
+        return knownIpAddressesPanel;
     }
 }

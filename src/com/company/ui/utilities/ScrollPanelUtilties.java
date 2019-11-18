@@ -1,8 +1,8 @@
 package com.company.ui.utilities;
 
 import com.company.DataBase.SQLiteDB;
-import com.company.network.AcceptRejectButtons;
 import com.company.network.NetworkDevice;
+import com.company.network.NewDeviceFoundPanel;
 import com.company.ui.view.ProjectScrollPanel;
 import com.company.ui.view.ProjectView;
 
@@ -12,15 +12,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.company.DataBase.SQLiteDB.*;
-
 import static com.company.network.Network.getDevices;
 
 public class ScrollPanelUtilties {
 
-    public static void updateView(ProjectView view) throws IOException {
+    public static void initalStartUp(ProjectView view) throws IOException {
         System.out.println("Updating Project View");
         List<NetworkDevice> networkDeviceList = getNetworkDeviceList();
+
+        for (NetworkDevice device: networkDeviceList) {
+            SQLiteDB.insertIntoSeen(device.getMAC());
+        }
 
         List<String> unknownDeviceList = getUnknownDevices(networkDeviceList).stream()
                 .map(networkDevice -> networkDevice.getMAC())
@@ -33,6 +35,41 @@ public class ScrollPanelUtilties {
 
         view.updateUnknownIpAddressList(unknownDeviceList);
         view.updateKnownIpAddressList(knownDeviceList);
+
+    }
+
+    public static void updateView(ProjectView view) throws IOException {
+        System.out.println("Updating Project View");
+        List<NetworkDevice> networkDeviceList = getNetworkDeviceList();
+
+        ProjectScrollPanel unknownIpAddressesPanel = view.getUnknownIpAddressesPanel();
+        ProjectScrollPanel knownIpAddressesPanel = view.getKnownIpAddressesPanel();
+
+        List<String> unknown = unknownIpAddressesPanel.getMacAddressList();
+        List<String> known = knownIpAddressesPanel.getMacAddressList();
+        Set<String> allDevices = SQLiteDB.getAllDevices();
+
+
+        for (NetworkDevice device: networkDeviceList) {
+            String mac = device.getMAC();
+            if(!allDevices.contains(mac)){
+                NewDeviceFoundPanel.NewDevice(mac, device.getIP());
+                SQLiteDB.insertIntoSeen(mac);
+            }
+        }
+
+        List<String> unknownDeviceList = getUnknownDevices(networkDeviceList).stream()
+                .map(networkDevice -> networkDevice.getMAC())
+                .collect(Collectors.toList());
+
+        List<String> knownDeviceList = getKnownDevices(networkDeviceList).stream()
+                .map(networkDevice -> networkDevice.getMAC())
+                .collect(Collectors.toList());
+
+
+        view.updateUnknownIpAddressList(unknownDeviceList);
+        view.updateKnownIpAddressList(knownDeviceList);
+
 
     }
 
@@ -58,7 +95,7 @@ public class ScrollPanelUtilties {
         scrollPanel.updateMacAddresses(knownDeviceList);
     }
 
-    private static List<NetworkDevice> getUnknownDevices(List<NetworkDevice> devices) throws IOException {
+    public static List<NetworkDevice> getUnknownDevices(List<NetworkDevice> devices) throws IOException {
         List<NetworkDevice> unknownDeviceList = new ArrayList<>();
         Set<String> knownDevices = SQLiteDB.getPermittedDevices();
 
@@ -90,7 +127,7 @@ public class ScrollPanelUtilties {
         return knownDeviceList;
     }
 
-    private static List<NetworkDevice> getNetworkDeviceList() {
+    public static List<NetworkDevice> getNetworkDeviceList() {
         System.out.println("Getting network devices");
         List<NetworkDevice> networkDeviceList = new ArrayList<>();
 
