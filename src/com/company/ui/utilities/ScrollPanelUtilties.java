@@ -20,6 +20,10 @@ public class ScrollPanelUtilties {
         System.out.println("Updating Project View");
         List<NetworkDevice> networkDeviceList = getNetworkDeviceList();
 
+        for (NetworkDevice device: networkDeviceList) {
+            SQLiteDB.insertIntoSeen(device.getMAC());
+        }
+
         List<String> unknownDeviceList = getUnknownDevices(networkDeviceList).stream()
                 .map(networkDevice -> networkDevice.getMAC())
                 .collect(Collectors.toList());
@@ -42,16 +46,15 @@ public class ScrollPanelUtilties {
         ProjectScrollPanel knownIpAddressesPanel = view.getKnownIpAddressesPanel();
 
         List<String> unknown = unknownIpAddressesPanel.getMacAddressList();
-
         List<String> known = knownIpAddressesPanel.getMacAddressList();
-        System.out.println(unknown.toString());
-        System.out.println(known.toString());
+        Set<String> allDevices = SQLiteDB.getAllDevices();
 
 
         for (NetworkDevice device: networkDeviceList) {
             String mac = device.getMAC();
-            if(!unknown.contains(mac) && !known.contains(mac)){
+            if(!allDevices.contains(mac)){
                 NewDeviceFoundPanel.NewDevice(mac, device.getIP());
+                SQLiteDB.insertIntoSeen(mac);
             }
         }
 

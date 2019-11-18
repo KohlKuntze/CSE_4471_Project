@@ -135,6 +135,38 @@ public class SQLiteDB {
             System.out.println(e.getMessage());
         }
     }
+
+    public static Set<String> getAllDevices(){
+        Set<String> permitted = new HashSet<>();
+        try{
+            //Set up a connection
+            Connection c = getConnection();
+            //Create a sql statement
+            Statement stmt = c.createStatement();
+
+            //Run the query and store it in a result set
+            ResultSet rs = stmt.executeQuery("Select * from Seen_Devices");
+
+            //Iterate through the result set and print out each device Mac address,IP and name
+            while(rs.next()){
+                String Mac_address = rs.getString("Mac_Address");
+                String IP_Address = rs.getString("IP_Add");
+                String Dev_Name = rs.getString("Device_Name");
+                permitted.add(Mac_address);
+                System.out.println(Mac_address+ "  "+IP_Address + "  " + Dev_Name );
+            }
+
+            //Close the statements, resultset, and connection
+            closeStatement(stmt);
+            closeResultSet(rs);
+            closeConnection(c);
+
+        } catch (Exception e){
+            //System.out.print(e.getMessage());
+        }
+        return(permitted);
+    }
+
     //This will create the seen devices table
     public static void createSeenTable(){
         try{
