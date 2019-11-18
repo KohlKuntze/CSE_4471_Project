@@ -20,15 +20,12 @@ public class Driver {
 
     private static void run(ProjectController controller) throws IOException, InterruptedException {
         ScrollPanelUtilties.initalStartUp(controller.getProjectView());
-        Thread.sleep(5000);
-        Thread.sleep(10000);
+        Thread.sleep(100);
 
 
         while (true) {
             ScrollPanelUtilties.updateView(controller.getProjectView());
-            Thread.sleep(5000);
-            Thread.sleep(10000);
-
+            Thread.sleep(100);
         }
     }
 

@@ -21,10 +21,10 @@ public class ProjectView extends JFrame {
         this.setSize(OVERALL_WIDTH, OVERALL_HEIGHT);
         this.setLayout(new GridLayout(1, 2));
 
-        unknownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getDenyPermissionActionListener(), "Give Permission");
+        unknownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getDenyPermissionActionListener(), "Unknown Devices", "Give Permission");
         this.add(unknownIpAddressesPanel);
 
-        knownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getPermitPermissionActionListener(), "Remove Permission");
+        knownIpAddressesPanel = new ProjectScrollPanel(ProjectActionListeners.getPermitPermissionActionListener(), "Known Devices", "Remove Permission");
         this.add(knownIpAddressesPanel);
 
         this.setVisible(true);

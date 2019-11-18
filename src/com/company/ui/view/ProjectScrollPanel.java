@@ -18,11 +18,16 @@ public class ProjectScrollPanel extends JPanel {
     JScrollPane scrollPane;
     SelectedItemListener selectedItemListener;
 
-    public ProjectScrollPanel(PermissionActionListener actionListener, String label) {
+    public ProjectScrollPanel(PermissionActionListener actionListener, String label, String buttonLabel) {
         setLayout(new BorderLayout());
 
-        actionButton = getActionButton(label, actionListener);
-        add(actionButton, BorderLayout.NORTH);
+        JLabel jLabel = new JLabel(label);
+        jLabel.setSize(new Dimension(750, 50));
+        jLabel.setHorizontalAlignment(JLabel.CENTER);
+        add(jLabel, BorderLayout.NORTH);
+
+        actionButton = getActionButton(buttonLabel, actionListener);
+        add(actionButton, BorderLayout.SOUTH);
 
         model = createMacAddressListModel(new ArrayList<>());
 
